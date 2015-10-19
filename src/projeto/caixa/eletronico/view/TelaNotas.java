@@ -70,7 +70,7 @@ public class TelaNotas extends JFrame implements ActionListener{
 
 		btVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuOperador mo = new MenuOperador(locale, BundleLocale);
+				TelaMenuOperador mo = new TelaMenuOperador(locale, BundleLocale);
 				dispose();
 			}
 		});

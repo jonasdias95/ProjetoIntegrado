@@ -1,74 +1,107 @@
 package projeto.caixa.eletronico.view;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import projeto.caixa.eletronico.model.Acesso;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class TelaSaque extends JFrame {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+public class TelaSaque extends JFrame implements ActionListener{
 	private JLabel frase;
-	private JLabel nomeCliente;
-	private JTextField txtValor;
-	private JButton b1;
-	private JButton b2;
-	private JButton b3;
-	private JButton b4;
-	private JButton b5;
-	private JButton b6;
-	private JButton sacar;
-	private JButton cancelar;
-	private JPanel painelTopo;
-	public TelaSaque(){
-		super("Saque");
-		painelTopo = new JPanel();
-		painelTopo.setLayout(new FlowLayout(FlowLayout.CENTER));
-		frase = new JLabel("Valor: ");
-		frase.setHorizontalAlignment(0);
-		nomeCliente = new JLabel("<NOME DO CLIENTE>");
-		nomeCliente.setHorizontalAlignment(0);
-		txtValor= new JTextField("Digite o valor desejado");
-		txtValor.setSize(10,50);
-		painelTopo.add(nomeCliente);
-		painelTopo.add(frase);
-		painelTopo.add(txtValor);
-		JPanel Esquerdo = new JPanel(new GridLayout(3,1));
-		JPanel Direito = new JPanel(new GridLayout(3,1));
-		JPanel Baixo = new JPanel(new FlowLayout());
-		b1 = new JButton("R$ 10,00");
-		b2 = new JButton("R$ 20,00");
-		b3 = new JButton("R$ 50,00");
-		b4 = new JButton("R$ 100,00");
-		b5 = new JButton("R$ 200,00");
-		b6 = new JButton("R$ 500,00");
-		sacar = new JButton("Sacar");
-		cancelar = new JButton("Cancelar");
-		Esquerdo.add(b1);
-		Esquerdo.add(b2);
-		Esquerdo.add(b3);
-		Direito.add(b4);
-		Direito.add(b5);
-		Direito.add(b6);
-		Baixo.add(sacar);
-		Baixo.add(cancelar);
-		this.setLayout(new BorderLayout(100,50));
-		this.getContentPane().add(painelTopo, BorderLayout.NORTH);
-		this.getContentPane().add(Esquerdo, BorderLayout.WEST);
-		this.getContentPane().add(Direito, BorderLayout.EAST);
-		this.getContentPane().add(Baixo, BorderLayout.SOUTH);
+	private JButton Imprimir;
+	private JButton voltar;
+	private JButton terminar;
+	private JPanel botoes;
+	private JPanel principal;
+	private JPanel conteudo;
+	private JButton v10; JButton v20; JButton v50; JButton v100; JButton v200; JButton v500;
+	private JLabel lblvalor;
+	private JTextField Tfvalor;
+	private JPanel OpcBase;
+	private JPanel Opc;
+	private JPanel Opc2;
+	private ImageIcon imgUsr;
+	private Dimension tam;
+	public Locale locale;
+	public ResourceBundle bundleLocale;
+
+	TelaSaque(Locale localeParam, ResourceBundle bundleParam, final Acesso acesso){
+		super(bundleParam.getString("tela.realizarSaque.titulo"));
+		setLocation(localeParam, bundleParam);
+		tam = new Dimension(100, 100);
+		imgUsr = new ImageIcon("Interface/login.png");
+		frase = new JLabel("<NOME DO CLIENTE> - "+ bundleLocale.getString("tela.realizarSaque.titulo") , imgUsr, SwingConstants.CENTER);
+		frase.setHorizontalAlignment(SwingConstants.LEFT);
+		Imprimir = new JButton(bundleLocale.getString("tela.button.imprimir"));
+		terminar = new JButton(bundleLocale.getString("tela.button.terminar"));
+		voltar = new JButton(bundleLocale.getString("tela.button.voltar"));
+		botoes = new JPanel();
+		principal = new JPanel();
+		conteudo = new JPanel(new BorderLayout());
+		v10 = new JButton(bundleLocale.getString("tela.realizarSaque.button.10"));
+			v10.setPreferredSize(tam);
+		v20 = new JButton(bundleLocale.getString("tela.realizarSaque.button.20"));
+			v20.setPreferredSize(tam);
+		v50 = new JButton(bundleLocale.getString("tela.realizarSaque.button.50"));
+			v50.setPreferredSize(tam);
+		v100 = new JButton(bundleLocale.getString("tela.realizarSaque.button.100"));
+			v100.setPreferredSize(tam);
+		v200 = new JButton(bundleLocale.getString("tela.realizarSaque.button.200"));
+			v200.setPreferredSize(tam);
+		v500 = new JButton(bundleLocale.getString("tela.realizarSaque.button.500"));
+			v500.setPreferredSize(tam);
+		lblvalor = new JLabel(bundleLocale.getString("tela.realizarSaque.label"));
+		Tfvalor = new JTextField(20);
+
+		Opc = new JPanel();
+			Opc.setLayout(new FlowLayout());
+			Opc.add(v10);
+			Opc.add(v20);
+			Opc.add(v50);
+			Opc.add(v100);
+			Opc.add(v200);
+			Opc.add(v500);
+		Opc2 = new JPanel(new FlowLayout());
+			Opc2.add(lblvalor);
+			Opc2.add(Tfvalor);
+		Opc2.setAlignmentY(Opc.getAlignmentY());
+	//	Conteudo.setLayout(new BorderLayout());
+		OpcBase = new JPanel(new FlowLayout());
+			OpcBase.add(Opc, SwingConstants.CENTER);
+			OpcBase.add(Opc2);
+		conteudo.add(OpcBase, BorderLayout.CENTER);
+		botoes.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			botoes.add(Imprimir);
+			botoes.add(terminar);
+			botoes.add(voltar);
+
+		principal.setLayout(new BorderLayout());
+		principal.add(BorderLayout.NORTH, frase);
+		principal.add(BorderLayout.CENTER, conteudo);
+		principal.add(BorderLayout.SOUTH, botoes);
+
+		getContentPane().add(principal);
+		setVisible(true);
+		setSize(800, 600);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuUsuario MU = new TelaMenuUsuario(locale, bundleLocale, acesso);
+				dispose();
+			}
+		});
 	}
-	public static void main(String[] args) {
-		TelaSaque saque = new TelaSaque();
-		//saque.pack();
-		saque.setSize(800,600);
-		saque.setVisible(true);
+	public void setLocation(Locale locale, ResourceBundle bundle){
+		this.locale = locale;
+		this.bundleLocale = bundle;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }

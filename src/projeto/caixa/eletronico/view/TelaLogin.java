@@ -93,7 +93,7 @@ public class TelaLogin extends JFrame {
 			ok.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					LoginController loginController = new LoginController(locale, BundleLocale);
-					loginController.setAcesso(txtConta.getText(), senha.getText());
+					loginController.setAcesso(txtConta.getText(), senha.getText(),Integer.parseInt(banco.getText()),Integer.parseInt(agencia.getText()));
 					loginController.actionPerformed(e);
 					dispose();
 				}

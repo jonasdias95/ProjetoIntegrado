@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
+import projeto.caixa.eletronico.model.Acesso;
+
 public class TelaGerarCodigo extends JFrame implements ActionListener{
 	/**
 	 *
@@ -25,7 +27,7 @@ public class TelaGerarCodigo extends JFrame implements ActionListener{
 	public Locale locale;
 	public ResourceBundle BundleLocale;
 
-	public TelaGerarCodigo(Locale localeParam, ResourceBundle bundleParam){
+	public TelaGerarCodigo(Locale localeParam, ResourceBundle bundleParam, final Acesso acesso){
 		super(bundleParam.getString("tela.gerarCodigo.titulo"));
 		setLocation(localeParam, bundleParam);
 		frase = new JLabel(bundleParam.getString("tela.gerarCodigo.label1"));
@@ -80,7 +82,7 @@ public class TelaGerarCodigo extends JFrame implements ActionListener{
 		ok.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				MenuUsuario MU = new MenuUsuario(locale, BundleLocale);
+				TelaMenuUsuario MU = new TelaMenuUsuario(locale, BundleLocale,acesso);
 				dispose();
 			}
 		});
@@ -92,6 +94,9 @@ public class TelaGerarCodigo extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+
+	}
+	public void setAcesso(Acesso acesso ){
 
 	}
 

@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.caixa.eletronico.model.Acesso;
+
 public class TelaExtrato extends JFrame implements ItemListener{
 	//Hierarquia dos JPanel´s
 	private JPanel painelPrincipal;
@@ -50,8 +52,9 @@ public class TelaExtrato extends JFrame implements ItemListener{
 	private selecionaOpcaoHandler	handler = new selecionaOpcaoHandler();
 	public Locale locale;
 	public ResourceBundle BundleLocale;
+	private Acesso acesso;
 
-	public TelaExtrato(Locale localeParam, ResourceBundle bundleParam){
+	public TelaExtrato(Locale localeParam, ResourceBundle bundleParam, final Acesso acesso){
 		super(bundleParam.getString("tela.consultarExtrato.titulo"));
 		setLocation(localeParam, bundleParam);
 		imgUsr = new ImageIcon("images/login.png");
@@ -62,6 +65,7 @@ public class TelaExtrato extends JFrame implements ItemListener{
 		painelTopo = new JPanel();
 		frasejp = new JPanel();
 		criaJTable();
+		this.acesso = acesso;
 		criaJanela();
 	}
 
@@ -121,7 +125,7 @@ public class TelaExtrato extends JFrame implements ItemListener{
 
 		btVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuUsuario MU = new MenuUsuario(locale, BundleLocale);
+				TelaMenuUsuario MU = new TelaMenuUsuario(locale, BundleLocale, acesso);
 				dispose();
 			}
 		});

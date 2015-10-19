@@ -85,7 +85,7 @@ public class TelaExtrairEstatistica extends JFrame {
 		
 		btVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuOperador mo = new MenuOperador(locale, bundleLocale);
+				TelaMenuOperador mo = new TelaMenuOperador(locale, bundleLocale);
 				dispose();
 			}
 		});

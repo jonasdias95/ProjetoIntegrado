@@ -1,9 +1,22 @@
 package projeto.caixa.eletronico.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Banco {
 	private String nomeBanco;
 	private int numBanco;
+	private List<Banco> bancos;
 
+
+	public Banco() {
+		super();
+		bancos = new ArrayList<Banco>();
+	}
+	public Banco(int numBanco) {
+		this.numBanco = numBanco;
+		this.bancos = new ArrayList<Banco>();
+	}
 	public String getNomeBanco() {
 		return nomeBanco;
 	}
@@ -15,6 +28,15 @@ public class Banco {
 	}
 	public void setNumBanco(int numBanco) {
 		this.numBanco = numBanco;
+	}
+	public List<Banco> getBancos() {
+		return bancos;
+	}
+	public void instanceBancos(){
+		bancos = new ArrayList<Banco>();
+	}
+	public void setBancos(List<Banco> bancos) {
+		this.bancos = bancos;
 	}
 
 }
